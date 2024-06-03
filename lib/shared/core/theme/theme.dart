@@ -1,4 +1,4 @@
-import 'package:ersys_client/core/theme/pallete.dart';
+import 'package:ersys_client/shared/core/theme/pallete.dart';
 import 'package:flutter/material.dart';
 
 class AppTheme {

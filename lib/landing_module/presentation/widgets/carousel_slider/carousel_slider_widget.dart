@@ -1,27 +1,29 @@
 import 'dart:async';
 
-import 'package:ersys_client/core/data/card_module.dart';
-import 'package:ersys_client/core/theme/pallete.dart';
+import 'package:ersys_client/landing_module/presentation/widgets/carousel_slider/slider_info_widget.dart';
+import 'package:ersys_client/shared/core/theme/pallete.dart';
+import 'package:ersys_client/shared/core/widgets/image_placeholder_wiget.dart';
+import 'package:ersys_client/shared/domain/entities/card_entity.dart';
 import 'package:flutter/material.dart';
 
 final PageController _pageController = PageController(initialPage: 0);
 
-
-class CarouselSlider extends StatefulWidget {
-  final List<CardModuleEntity> items;
+class CarouselSliderWidget extends StatefulWidget {
+  final List<CardEntity> items;
   int _activePage = 0;
   late Timer _timer;
 
-  CarouselSlider({super.key, required this.items});
+  CarouselSliderWidget({super.key, required this.items});
 
   @override
-  State<CarouselSlider> createState() => _CarouselSliderState();
+  State<CarouselSliderWidget> createState() => _CarouselSliderWidgetState();
 }
 
-class _CarouselSliderState extends State<CarouselSlider> {
+class _CarouselSliderWidgetState extends State<CarouselSliderWidget> {
   void startTimer() {
     widget._timer = Timer.periodic(const Duration(seconds: 3), (timer) {
-      if (_pageController.page == widget.items.length - 1) {
+      bool isLastPage = _pageController.page == widget.items.length - 1;
+      if (isLastPage) {
         _pageController.animateToPage(0,
             duration: const Duration(milliseconds: 500),
             curve: Curves.easeInOut);
@@ -54,9 +56,13 @@ class _CarouselSliderState extends State<CarouselSlider> {
               },
               itemCount: widget.items.length,
               itemBuilder: (context, index) {
-                return const ImagePlacehoder(
-                    imagePath: "assets/images/Mme Souame 17 mai 2023-10.jpg");
+                return ImagePlacehoderWidget(
+                    imagePath: widget.items[index].imageUrl);
               }),
+        ),
+        SliderInfoWidget(
+          index: widget._activePage,
+          items: widget.items,
         ),
         Positioned(
           bottom: 4,
@@ -113,19 +119,6 @@ class _SliderIndicatorState extends State<SliderIndicator> {
                       ),
                     ),
                   ))),
-    );
-  }
-}
-
-class ImagePlacehoder extends StatelessWidget {
-  final String imagePath;
-  const ImagePlacehoder({super.key, required this.imagePath});
-
-  @override
-  Widget build(BuildContext context) {
-    return Image.asset(
-      imagePath,
-      fit: BoxFit.cover,
     );
   }
 }

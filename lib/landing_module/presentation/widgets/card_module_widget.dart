@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class CardModule extends StatelessWidget {
+class CardModuleWidget extends StatelessWidget {
   late final String _imageUrl, _title;
 
-  CardModule({super.key, required title, required imageUrl}) {
+  CardModuleWidget({super.key, required title, required imageUrl}) {
     _imageUrl = imageUrl;
     _title = title;
   }

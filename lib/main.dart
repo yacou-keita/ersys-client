@@ -1,5 +1,5 @@
-import 'package:ersys_client/core/theme/theme.dart';
-import 'package:ersys_client/home.dart';
+import 'package:ersys_client/shared/core/theme/theme.dart';
+import 'package:ersys_client/landing_module/presentation/pages/home_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,7 +13,7 @@ class ErsysClientApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: AppTheme.lightThemeMode,
-      home: const Home(),
+      home: const HomePage(),
       debugShowCheckedModeBanner: false,
     );
   }
