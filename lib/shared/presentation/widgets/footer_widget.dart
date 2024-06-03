@@ -1,8 +1,8 @@
 import 'package:ersys_client/shared/core/theme/pallete.dart';
 import 'package:flutter/material.dart';
 
-class Footer extends StatelessWidget {
-  const Footer({super.key});
+class FooterWidget extends StatelessWidget {
+  const FooterWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

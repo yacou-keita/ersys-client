@@ -1,11 +1,13 @@
 import 'package:ersys_client/shared/core/theme/pallete.dart';
 import 'package:ersys_client/shared/domain/entities/card_entity.dart';
+import 'package:ersys_client/shared/presentation/widgets/title_widget.dart';
 import 'package:flutter/material.dart';
 
 class SliderInfoWidget extends StatelessWidget {
-  late List<CardEntity>  _items;
-  late int _index = 0;
-  SliderInfoWidget({super.key, required int index, required List<CardEntity> items}) {
+  late final List<CardEntity> _items;
+  late final int _index;
+  SliderInfoWidget(
+      {super.key, int index = 0, required List<CardEntity> items}) {
     _items = items;
     _index = index;
   }
@@ -18,13 +20,7 @@ class SliderInfoWidget extends StatelessWidget {
       color: AppPallete.white70,
       child:
           Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-        Text(
-            style: const TextStyle(
-                color: AppPallete.primary,
-                fontWeight: FontWeight.bold,
-                fontSize: 17),
-            textAlign: TextAlign.center,
-            _items[_index].title.toUpperCase()),
+        TitleWidget(title: _items[_index].title.toUpperCase()),
         Text(
             style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
             textAlign: TextAlign.center,
@@ -35,8 +31,7 @@ class SliderInfoWidget extends StatelessWidget {
               backgroundColor: AppPallete.scondary,
               foregroundColor: AppPallete.white,
             ),
-            child: Text(
-                _items[_index].buttonTitle.toUpperCase()))
+            child: Text(_items[_index].buttonTitle.toUpperCase()))
       ]),
     );
   }

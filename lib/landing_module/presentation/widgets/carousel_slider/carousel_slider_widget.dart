@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:ersys_client/landing_module/presentation/widgets/carousel_slider/slider_info_widget.dart';
 import 'package:ersys_client/shared/core/theme/pallete.dart';
-import 'package:ersys_client/shared/core/widgets/image_placeholder_wiget.dart';
 import 'package:ersys_client/shared/domain/entities/card_entity.dart';
+import 'package:ersys_client/shared/presentation/widgets/image_placeholder_wiget.dart';
 import 'package:flutter/material.dart';
 
 final PageController _pageController = PageController(initialPage: 0);

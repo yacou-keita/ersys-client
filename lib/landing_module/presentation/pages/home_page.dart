@@ -3,8 +3,9 @@ import 'package:ersys_client/landing_module/core/data/carousel_data.dart';
 import 'package:ersys_client/landing_module/presentation/widgets/card_module_widget.dart';
 import 'package:ersys_client/landing_module/presentation/widgets/carousel_slider/carousel_slider_widget.dart';
 import 'package:ersys_client/shared/core/theme/pallete.dart';
-import 'package:ersys_client/shared/core/widgets/footer.dart';
 import 'package:ersys_client/shared/domain/entities/card_entity.dart';
+import 'package:ersys_client/shared/presentation/widgets/footer_widget.dart';
+import 'package:ersys_client/shared/presentation/widgets/title_widget.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -31,12 +32,10 @@ class HomePage extends StatelessWidget {
                   border: Border(
                       bottom:
                           BorderSide(color: AppPallete.primary, width: 1.0))),
-              child: Text(
-                "services en ligne".toUpperCase(),
-                style: const TextStyle(
-                    color: AppPallete.scondary,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 25),
+              child: TitleWidget(
+                title: "services en ligne".toUpperCase(),
+                color: AppPallete.scondary,
+                fontSize: 25,
               )),
           Expanded(
             flex: 3,
@@ -50,7 +49,7 @@ class HomePage extends StatelessWidget {
                   );
                 }),
           ),
-          const Expanded(flex: 0,child: Footer())
+          const Expanded(flex: 0, child: FooterWidget())
         ],
       ),
     );
