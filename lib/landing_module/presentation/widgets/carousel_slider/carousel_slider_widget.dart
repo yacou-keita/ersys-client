@@ -1,7 +1,7 @@
 import 'dart:async';
 
+import 'package:ersys_client/landing_module/presentation/widgets/carousel_slider/slider_indicator_widget.dart';
 import 'package:ersys_client/landing_module/presentation/widgets/carousel_slider/slider_info_widget.dart';
-import 'package:ersys_client/shared/core/theme/pallete.dart';
 import 'package:ersys_client/shared/domain/entities/card_entity.dart';
 import 'package:ersys_client/shared/presentation/widgets/image_placeholder_wiget.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +23,7 @@ class CarouselSliderWidget extends StatefulWidget {
 class _CarouselSliderWidgetState extends State<CarouselSliderWidget> {
   int _activePage = 0;
 
-  void startTimer() {
+  void _startTimer() {
     widget._timer = Timer.periodic(const Duration(seconds: 3), (timer) {
       bool isLastPage = _pageController.page == widget._items.length - 1;
       if (isLastPage) {
@@ -40,7 +40,7 @@ class _CarouselSliderWidgetState extends State<CarouselSliderWidget> {
   @override
   void initState() {
     super.initState();
-    startTimer();
+    _startTimer();
   }
 
   @override
@@ -71,9 +71,14 @@ class _CarouselSliderWidgetState extends State<CarouselSliderWidget> {
           bottom: 4,
           left: 0,
           right: 0,
-          child: SliderIndicator(
+          child: SliderIndicatorWidget(
             activePage: _activePage,
             itemLength: widget._items.length,
+            onTap: (int index) {
+              _pageController.animateToPage(index,
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeIn);
+            },
           ),
         )
       ],
@@ -84,48 +89,5 @@ class _CarouselSliderWidgetState extends State<CarouselSliderWidget> {
   void dispose() {
     super.dispose();
     widget._timer.cancel();
-  }
-}
-
-class SliderIndicator extends StatefulWidget {
-  late final int _itemLength;
-  late final int _activePage;
-
-  SliderIndicator(
-      {super.key, required final int itemLength, required int activePage}) {
-    _itemLength = itemLength;
-    _activePage = activePage;
-  }
-
-  @override
-  State<SliderIndicator> createState() => _SliderIndicatorState();
-}
-
-class _SliderIndicatorState extends State<SliderIndicator> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.transparent,
-      child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: List.generate(
-              widget._itemLength,
-              (index) => Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 5),
-                    child: GestureDetector(
-                      onTap: () {
-                        _pageController.animateToPage(index,
-                            duration: const Duration(milliseconds: 300),
-                            curve: Curves.easeIn);
-                      },
-                      child: CircleAvatar(
-                        backgroundColor: widget._activePage == index
-                            ? AppPallete.primary
-                            : AppPallete.grey,
-                        radius: 4,
-                      ),
-                    ),
-                  ))),
-    );
   }
 }
