@@ -9,20 +9,23 @@ import 'package:flutter/material.dart';
 final PageController _pageController = PageController(initialPage: 0);
 
 class CarouselSliderWidget extends StatefulWidget {
-  final List<CardEntity> items;
-  int _activePage = 0;
-  late Timer _timer;
+  late final List<CardEntity> _items;
+  late final Timer _timer;
 
-  CarouselSliderWidget({super.key, required this.items});
+  CarouselSliderWidget({super.key, required final List<CardEntity> items}) {
+    _items = items;
+  }
 
   @override
   State<CarouselSliderWidget> createState() => _CarouselSliderWidgetState();
 }
 
 class _CarouselSliderWidgetState extends State<CarouselSliderWidget> {
+  int _activePage = 0;
+
   void startTimer() {
     widget._timer = Timer.periodic(const Duration(seconds: 3), (timer) {
-      bool isLastPage = _pageController.page == widget.items.length - 1;
+      bool isLastPage = _pageController.page == widget._items.length - 1;
       if (isLastPage) {
         _pageController.animateToPage(0,
             duration: const Duration(milliseconds: 500),
@@ -51,26 +54,26 @@ class _CarouselSliderWidgetState extends State<CarouselSliderWidget> {
               controller: _pageController,
               onPageChanged: (value) {
                 setState(() {
-                  widget._activePage = value;
+                  _activePage = value;
                 });
               },
-              itemCount: widget.items.length,
+              itemCount: widget._items.length,
               itemBuilder: (context, index) {
                 return ImagePlacehoderWidget(
-                    imagePath: widget.items[index].imageUrl);
+                    imagePath: widget._items[index].imageUrl);
               }),
         ),
         SliderInfoWidget(
-          index: widget._activePage,
-          items: widget.items,
+          index: _activePage,
+          items: widget._items,
         ),
         Positioned(
           bottom: 4,
           left: 0,
           right: 0,
           child: SliderIndicator(
-            activePage: widget._activePage,
-            itemLength: widget.items.length,
+            activePage: _activePage,
+            itemLength: widget._items.length,
           ),
         )
       ],
@@ -85,10 +88,14 @@ class _CarouselSliderWidgetState extends State<CarouselSliderWidget> {
 }
 
 class SliderIndicator extends StatefulWidget {
-  late final int itemLength;
-  int activePage;
+  late final int _itemLength;
+  late final int _activePage;
+
   SliderIndicator(
-      {super.key, required this.itemLength, required this.activePage});
+      {super.key, required final int itemLength, required int activePage}) {
+    _itemLength = itemLength;
+    _activePage = activePage;
+  }
 
   @override
   State<SliderIndicator> createState() => _SliderIndicatorState();
@@ -102,7 +109,7 @@ class _SliderIndicatorState extends State<SliderIndicator> {
       child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: List.generate(
-              widget.itemLength,
+              widget._itemLength,
               (index) => Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 5),
                     child: GestureDetector(
@@ -112,7 +119,7 @@ class _SliderIndicatorState extends State<SliderIndicator> {
                             curve: Curves.easeIn);
                       },
                       child: CircleAvatar(
-                        backgroundColor: widget.activePage == index
+                        backgroundColor: widget._activePage == index
                             ? AppPallete.primary
                             : AppPallete.grey,
                         radius: 4,
