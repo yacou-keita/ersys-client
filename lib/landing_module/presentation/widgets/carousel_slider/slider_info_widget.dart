@@ -1,4 +1,4 @@
-import 'package:ersys_client/shared/core/theme/pallete.dart';
+import 'package:ersys_client/shared/core/theme/color.dart';
 import 'package:ersys_client/shared/domain/entities/card_entity.dart';
 import 'package:ersys_client/shared/presentation/widgets/title_widget.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +17,7 @@ class SliderInfoWidget extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 50),
       padding: const EdgeInsets.symmetric(horizontal: 2),
-      color: AppPallete.white70,
+      color: AppColors.white70,
       child:
           Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
         TitleWidget(title: _items[_index].title.toUpperCase()),
@@ -28,8 +28,8 @@ class SliderInfoWidget extends StatelessWidget {
         ElevatedButton(
             onPressed: () {},
             style: ElevatedButton.styleFrom(
-              backgroundColor: AppPallete.scondary,
-              foregroundColor: AppPallete.white,
+              backgroundColor: AppColors.scondary,
+              foregroundColor: AppColors.white,
             ),
             child: Text(_items[_index].buttonTitle.toUpperCase()))
       ]),

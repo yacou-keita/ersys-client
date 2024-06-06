@@ -1,4 +1,4 @@
-import 'package:ersys_client/shared/core/theme/pallete.dart';
+import 'package:ersys_client/shared/core/theme/color.dart';
 import 'package:flutter/material.dart';
 
 class SliderIndicatorWidget extends StatelessWidget {
@@ -30,8 +30,8 @@ class SliderIndicatorWidget extends StatelessWidget {
                       onTap: () => _onTap!(index),
                       child: CircleAvatar(
                         backgroundColor: _activePage == index
-                            ? AppPallete.primary
-                            : AppPallete.grey,
+                            ? AppColors.primary
+                            : AppColors.grey,
                         radius: 4,
                       ),
                     ),

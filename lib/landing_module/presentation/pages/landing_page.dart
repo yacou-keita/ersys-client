@@ -2,7 +2,7 @@ import 'package:ersys_client/landing_module/core/data/card_data.dart';
 import 'package:ersys_client/landing_module/core/data/carousel_data.dart';
 import 'package:ersys_client/landing_module/presentation/widgets/card_module_widget.dart';
 import 'package:ersys_client/landing_module/presentation/widgets/carousel_slider/carousel_slider_widget.dart';
-import 'package:ersys_client/shared/core/theme/pallete.dart';
+import 'package:ersys_client/shared/core/theme/color.dart';
 import 'package:ersys_client/shared/domain/entities/card_entity.dart';
 import 'package:ersys_client/shared/presentation/widgets/footer_widget.dart';
 import 'package:ersys_client/shared/presentation/widgets/title_widget.dart';
@@ -31,10 +31,10 @@ class LandingPage extends StatelessWidget {
               decoration: const BoxDecoration(
                   border: Border(
                       bottom:
-                          BorderSide(color: AppPallete.primary, width: 1.0))),
+                          BorderSide(color: AppColors.primary, width: 1.0))),
               child: TitleWidget(
                 title: "services en ligne".toUpperCase(),
-                color: AppPallete.scondary,
+                color: AppColors.scondary,
                 fontSize: 25,
               )),
           Expanded(

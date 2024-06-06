@@ -1,9 +1,16 @@
-import 'package:ersys_client/shared/core/theme/pallete.dart';
+import 'package:ersys_client/shared/core/theme/color.dart';
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  static final darkThemeMode = ThemeData.dark().copyWith(
-    scaffoldBackgroundColor: AppPallete.darkBackgroundcolor
-  );
-  static final lightThemeMode = ThemeData.light();
+  static _border([Color color = AppColors.grey]) => OutlineInputBorder(
+      borderRadius: BorderRadius.circular(10),
+      borderSide: BorderSide(color: color, width: 2));
+
+  static final darkThemeMode = ThemeData.dark()
+      .copyWith(scaffoldBackgroundColor: AppColors.darkBackgroundcolor);
+
+  static final lightThemeMode = ThemeData.light().copyWith(
+      inputDecorationTheme: InputDecorationTheme(
+          enabledBorder: _border(),
+          focusedBorder: _border(AppColors.primary)));
 }
