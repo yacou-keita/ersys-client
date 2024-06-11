@@ -1,6 +1,9 @@
 import 'package:ersys_client/shared/core/theme/color.dart';
+import 'package:ersys_client/shared/domain/entities/item_entity.dart';
+import 'package:ersys_client/shared/domain/entities/item_list.entity.dart';
 import 'package:ersys_client/shared/presentation/widgets/button_widget.dart';
 import 'package:ersys_client/shared/presentation/widgets/input_field_widget.dart';
+import 'package:ersys_client/shared/presentation/widgets/select_option_widget.dart';
 import 'package:ersys_client/shared/presentation/widgets/title_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -14,6 +17,7 @@ class FreeCandidatePage extends StatefulWidget {
 class _FreeCandidatePageState extends State<FreeCandidatePage> {
   final _formKey = GlobalKey<FormState>();
   final matriculeOrTableNumber = TextEditingController();
+  late ItemEntity _itemSelected;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,6 +48,18 @@ class _FreeCandidatePageState extends State<FreeCandidatePage> {
                 children: [
                   const SizedBox(
                     height: 30,
+                  ),
+                  SelectOptionWidget(
+                    item: ItemListEntity(listItem: [
+                      ItemEntity(id: "M", title: "Matricule"),
+                      ItemEntity(id: "N", title: "Numero de table")
+                    ]),
+                    onItemSelected: (item) {
+                      _itemSelected = item;
+                    },
+                  ),
+                  const SizedBox(
+                    height: 15,
                   ),
                   InputFieldWidget(
                     hintText: "matricule",

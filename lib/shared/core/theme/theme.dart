@@ -10,9 +10,10 @@ class AppTheme {
       .copyWith(scaffoldBackgroundColor: AppColors.darkBackgroundcolor);
 
   static final lightThemeMode = ThemeData.light().copyWith(
-      inputDecorationTheme: InputDecorationTheme(
-          hintStyle: const TextStyle(color: AppColors.grey),
-          labelStyle: const TextStyle(color: AppColors.grey),
-          enabledBorder: _border(),
-          focusedBorder: _border(AppColors.primary)));
+    inputDecorationTheme: InputDecorationTheme(
+        hintStyle: const TextStyle(color: AppColors.grey),
+        labelStyle: const TextStyle(color: AppColors.grey),
+        enabledBorder: _border(),
+        focusedBorder: _border(AppColors.primary)),
+  );
 }
