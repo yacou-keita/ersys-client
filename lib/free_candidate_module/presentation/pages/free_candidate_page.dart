@@ -12,15 +12,15 @@ class FreeCandidatePage extends StatefulWidget {
 }
 
 class _FreeCandidatePageState extends State<FreeCandidatePage> {
+  final _formKey = GlobalKey<FormState>();
+  final matriculeOrTableNumber = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(15.0),
-        child: Column(children: [
-          const ListTile(
-            leading: Icon(Icons.arrow_back_ios),
-          ),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          const Icon(Icons.arrow_back_ios),
           const SizedBox(
             height: 20,
           ),
@@ -35,26 +35,52 @@ class _FreeCandidatePageState extends State<FreeCandidatePage> {
           ListTile(
             title: TitleWidget(
                 title: "1/6 - IDENTIFICATION", align: TextAlign.start),
-            subtitle: const Text("Vérification d'identité",style: TextStyle(color: AppColors.black)),
+            subtitle: const Text("Vérification d'identité",
+                style: TextStyle(color: AppColors.black)),
           ),
-          const SizedBox(
-            height: 30,
-          ),
-          InputFieldWidget(
-            hintText: "matricule",
-          ),
-          const SizedBox(
-            height: 15,
-          ),
-          InputFieldWidget(
-            hintText: "numero de table",
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          const ButtonWidget()
+          Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  InputFieldWidget(
+                    hintText: "matricule",
+                    controller: matriculeOrTableNumber,
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  InputFieldWidget(
+                    hintText: "numero de table",
+                    controller: matriculeOrTableNumber,
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  ButtonWidget(
+                    title: "Identifiez-vous",
+                    onPressed: _validateForm,
+                  )
+                ],
+              ))
         ]),
       ),
     );
+  }
+
+  _validateForm() {
+    if (_formKey.currentState!.validate()) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Processing Data')),
+      );
+    }
+  }
+
+  @override
+  void dispose() {
+    matriculeOrTableNumber.dispose();
+    super.dispose();
   }
 }
