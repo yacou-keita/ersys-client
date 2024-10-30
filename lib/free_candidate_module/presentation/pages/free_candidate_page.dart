@@ -17,7 +17,9 @@ class FreeCandidatePage extends StatefulWidget {
 class _FreeCandidatePageState extends State<FreeCandidatePage> {
   final _formKey = GlobalKey<FormState>();
   final matriculeOrTableNumber = TextEditingController();
-  late ItemEntity _itemSelected;
+
+  final ItemEntity _itemSelected = ItemEntity.init();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,23 +57,27 @@ class _FreeCandidatePageState extends State<FreeCandidatePage> {
                       ItemEntity(id: "N", title: "Numero de table")
                     ]),
                     onItemSelected: (item) {
-                      _itemSelected = item;
+                      setState(() {
+                        _itemSelected.copyWith(id: item.id);
+                      });
                     },
                   ),
                   const SizedBox(
                     height: 15,
                   ),
-                  InputFieldWidget(
-                    hintText: "matricule",
-                    controller: matriculeOrTableNumber,
-                  ),
+                  if (_itemSelected.id == "M")
+                    InputFieldWidget(
+                      hintText: "matricule",
+                      controller: matriculeOrTableNumber,
+                    ),
                   const SizedBox(
                     height: 15,
                   ),
-                  InputFieldWidget(
-                    hintText: "numero de table",
-                    controller: matriculeOrTableNumber,
-                  ),
+                  if (_itemSelected.id == "N")
+                    InputFieldWidget(
+                      hintText: "numero de table",
+                      controller: matriculeOrTableNumber,
+                    ),
                   const SizedBox(
                     height: 20,
                   ),
